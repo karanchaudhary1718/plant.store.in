@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="B.L. Verdantix – Premium Online Plant Store. Shop indoor, outdoor, succulents & more. Free delivery, healthy plants.">
+<title>B.L. Verdantix – Bring Nature Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  🌿 Free delivery on orders above ₹699 &nbsp;|&nbsp; 100% Healthy Plants Guaranteed
+  <span class="wa-link" onclick="openWhatsApp('Hello! I want to place an order.')">
+    <i class="fab fa-whatsapp"></i> Order on WhatsApp
+  </span>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo" onclick="goPage('home')">
+    <div class="nav-logo-icon">🌿</div>
+    B.L. <span>Verdantix</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="goPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="goPage('shop')" id="nav-shop">Shop</a></li>
+    <li><a href="#" onclick="goPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="goPage('blog')" id="nav-blog">Plant Care</a></li>
+    <li><a href="#" onclick="goPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div class="nav-search-bar">
+      <i class="fas fa-search" style="color:var(--text-light);font-size:13px"></i>
+      <input type="text" placeholder="Search plants…" onkeyup="handleSearch(event)">
+    </div>
+    <button class="icon-btn" onclick="goPage('shop')" title="Search"><i class="fas fa-search"></i></button>
+    <button class="icon-btn" onclick="goPage('wishlist')" title="Wishlist">
+      <i class="fas fa-heart"></i>
+      <span class="badge" id="wishlistCount" style="display:none">0</span>
+    </button>
+    <button class="icon-btn" onclick="goPage('cart')" title="Cart">
+      <i class="fas fa-shopping-bag"></i>
+      <span class="badge" id="cartCount" style="display:none">0</span>
+    </button>
+  </div>
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="goPage('home');toggleMobileMenu()">Home</a>
+  <a href="#" onclick="goPage('shop');toggleMobileMenu()">Shop</a>
+  <a href="#" onclick="goPage('about');toggleMobileMenu()">About Us</a>
+  <a href="#" onclick="goPage('blog');toggleMobileMenu()">Plant Care</a>
+  <a href="#" onclick="goPage('contact');toggleMobileMenu()">Contact</a>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<div class="float-wa" onclick="openWhatsApp('Hello! I want to place an order.')">
+  <i class="fab fa-whatsapp"></i>
+  <div class="float-wa-tooltip">Order on WhatsApp</div>
+</div>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="page active" id="page-home">
+
+<!-- HERO SLIDER -->
+<section class="hero-slider">
+  <div class="slider-wrapper" id="sliderWrapper">
+    <div class="slide slide-1">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="hero-badge">🌱 &nbsp; Premium Plants, Delivered Fresh</div>
+        <h1>Bring<br><em>Nature Home</em></h1>
+        <p>Handpicked, healthy plants curated for every space — from cozy apartments to grand offices.</p>
+        <div class="hero-btns">
+          <button class="btn-white" onclick="goPage('shop')"><i class="fas fa-leaf"></i> Shop Now</button>
+          <button class="btn-whatsapp" onclick="openWhatsApp('Hello! I want to order plants.')"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+    <div class="slide slide-2">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="hero-badge">🌸 &nbsp; Flowering Collection</div>
+        <h1>Blooms That<br><em>Last Forever</em></h1>
+        <p>Discover our curated flowering plant collection — vivid colours, long-lasting blooms, and fragrant beauty.</p>
+        <div class="hero-btns">
+          <button class="btn-white" onclick="filterCategory('flowering')"><i class="fas fa-seedling"></i> Shop Flowering</button>
+          <button class="btn-whatsapp" onclick="openWhatsApp('Hello! I want to order flowering plants.')"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+    <div class="slide slide-3">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="hero-badge">🌵 &nbsp; Succulents & Cacti</div>
+        <h1>Low Care,<br><em>High Beauty</em></h1>
+        <p>Zero-fuss succulents and cacti for beginners and collectors alike. Delivered safely to your doorstep.</p>
+        <div class="hero-btns">
+          <button class="btn-white" onclick="filterCategory('succulents')"><i class="fas fa-cactus"></i> Shop Succulents</button>
+          <button class="btn-whatsapp" onclick="openWhatsApp('Hello! I want to order succulents.')"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+    <div class="slide slide-4">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="hero-badge">🎁 &nbsp; Gift a Living Plant</div>
+        <h1>The Gift That<br><em>Keeps Growing</em></h1>
+        <p>Beautiful gift packaging, personal notes, and fresh healthy plants. The perfect green gift for every occasion.</p>
+        <div class="hero-btns">
+          <button class="btn-white" onclick="openWhatsApp('Hello! I want to order a gift plant.')"><i class="fas fa-gift"></i> Order Gift Plant</button>
+          <button class="btn-whatsapp" onclick="openWhatsApp('Hello! Tell me about gift options.')"><i class="fab fa-whatsapp"></i> Ask on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="slider-arrow slider-prev" onclick="slideMove(-1)"><i class="fas fa-chevron-left"></i></button>
+  <button class="slider-arrow slider-next" onclick="slideMove(1)"><i class="fas fa-chevron-right"></i></button>
+  <div class="slider-dots" id="sliderDots">
+    <span class="slider-dot active" onclick="goSlide(0)"></span>
+    <span class="slider-dot" onclick="goSlide(1)"></span>
+    <span class="slider-dot" onclick="goSlide(2)"></span>
+    <span class="slider-dot" onclick="goSlide(3)"></span>
+  </div>
+  <div class="slider-stats">
+    <div class="slider-stat"><strong>12K+</strong><span>Happy Customers</span></div>
+    <div class="slider-stat"><strong>300+</strong><span>Plant Varieties</span></div>
+    <div class="slider-stat"><strong>4.9★</strong><span>Average Rating</span></div>
+  </div>
+</section>
+
+<!-- PLANT TYPE STRIP -->
+<section class="plant-type-strip">
+  <div class="plant-type-inner">
+    <div class="plant-type-card" onclick="filterCategory('large')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540695/monstera_deliciosa_onmabh.jpg" alt="XL Plant"></div>
+      <div class="plant-type-label">XL Plant</div>
+      <div class="plant-type-sub">100+ cm</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('indoor')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540805/Rib_high_ryzoyn.jpg" alt="Indoor Plant"></div>
+      <div class="plant-type-label">Indoor Plant</div>
+      <div class="plant-type-sub">20–35 cm</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('outdoor')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540710/thuja_apwffi.jpg" alt="Outdoor Plant"></div>
+      <div class="plant-type-label">Outdoor Plant</div>
+      <div class="plant-type-sub">35–60 cm</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('succulents')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540720/christmas_cactus_tfoxuy.jpg" alt="Succulent"></div>
+      <div class="plant-type-label">Succulent</div>
+      <div class="plant-type-sub">Zero fuss</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('flowering')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540879/poinsettia_pink_a8mgu3.jpg" alt="Flowering Plant"></div>
+      <div class="plant-type-label">Flowering Plant</div>
+      <div class="plant-type-sub">Blooms & colour</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('seeds')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540739/Bottle_Gourd_ovlqav.jpg" alt="Seeds & Bulbs"></div>
+      <div class="plant-type-label">Seeds & Bulbs</div>
+      <div class="plant-type-sub">Grow your garden</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('hanging')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540753/2_29f9e836-7ec4-48bf-a85e-c08ab252220e_rwlnyt.webp" alt="Hanging Plant"></div>
+      <div class="plant-type-label">Hanging Plant</div>
+      <div class="plant-type-sub">Trailing beauty</div>
+    </div>
+    <div class="plant-type-card" onclick="filterCategory('Plant care')">
+      <div class="plant-type-img"><img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540896/0d233eca-ee3b-4cf1-816d-5a83501cf827_skg6pc.png" alt="Plant Care"></div>
+      <div class="plant-type-label">Plant Care</div>
+      <div class="plant-type-sub">Keep your plants healthy</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW LAUNCHES -->
+<section class="section" style="background:var(--green-foam)">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Just Arrived</span>
+      <h2>Our New <em>Launches</em></h2>
+      <p>Fresh additions to our collection — be the first to bring them home!</p>
+    </div>
+    <div class="products-grid" id="newLaunchesGrid"></div>
+    <div style="text-align:center;margin-top:48px">
+      <button class="btn-outline" onclick="goPage('shop')">View All New Plants <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" style="background:white">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Explore Collections</span>
+      <h2>Shop by <em>Category</em></h2>
+      <p>Find the perfect plant for every corner of your life</p>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card fade-in stagger-1" onclick="filterCategory('indoor')">
+        <div class="category-icon">🌱</div><h3>Indoor Plants</h3><span>84 varieties</span>
+      </div>
+      <div class="category-card fade-in stagger-2" onclick="filterCategory('outdoor')">
+        <div class="category-icon">🌳</div><h3>Outdoor Plants</h3><span>62 varieties</span>
+      </div>
+      <div class="category-card fade-in stagger-3" onclick="filterCategory('succulents')">
+        <div class="category-icon">🌵</div><h3>Succulents & Cacti</h3><span>48 varieties</span>
+      </div>
+      <div class="category-card fade-in stagger-4" onclick="filterCategory('hanging')">
+        <div class="category-icon">🪴</div><h3>Hanging Plants</h3><span>36 varieties</span>
+      </div>
+      <div class="category-card fade-in stagger-4" onclick="filterCategory('flowering')">
+        <div class="category-icon">🌸</div><h3>Flowering Plants</h3><span>52 varieties</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEST SELLERS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Most Loved</span>
+      <h2>Best <em>Sellers</em></h2>
+      <p>Our customers' all-time favourites — click WhatsApp to order instantly</p>
+    </div>
+    <div class="products-grid" id="homeBestSellers"></div>
+    <div style="text-align:center;margin-top:48px">
+      <button class="btn-outline" onclick="goPage('shop')">View All Plants <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section why-us">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Why B.L. Verdantix</span>
+      <h2>Grown with <em>Care</em></h2>
+      <p>Every plant you receive is nurtured with love from our expert growers</p>
+    </div>
+    <div class="why-us-grid">
+      <div class="why-card"><div class="why-icon">🚚</div><h3>Free Delivery</h3><p>Free shipping on all orders above ₹999. Safe, eco-friendly packaging ensures plants arrive fresh.</p></div>
+      <div class="why-card"><div class="why-icon">🌿</div><h3>100% Healthy Plants</h3><p>Every plant is inspected by our horticulturists before dispatch. Guaranteed pest-free and thriving.</p></div>
+      <div class="why-card"><div class="why-icon">📦</div><h3>Safe Packaging</h3><p>Specially designed plant packaging prevents any damage during transit — your plant arrives perfect.</p></div>
+      <div class="why-card"><div class="why-icon">💬</div><h3>WhatsApp Support</h3><p>Get instant answers, track your order, and chat with our plant experts directly on WhatsApp.</p></div>
+      <div class="why-card"><div class="why-icon">🎁</div><h3>Gift Ready</h3><p>Beautiful gift packaging with a personal note. The perfect green gift for any occasion.</p></div>
+      <div class="why-card"><div class="why-icon">🌍</div><h3>Eco-Friendly</h3><p>100% biodegradable packaging, sustainable sourcing, and carbon-conscious delivery practices.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES BANNER -->
+<section class="offices-banner">
+  <h2>Plants for <em style="color:rgba(255,255,255,0.85)">Every Space</em></h2>
+  <p>We supply curated plant collections to commercial and institutional spaces across India</p>
+  <div class="offices-grid">
+    <div class="office-pill">🏢 Corporate Offices</div>
+    <div class="office-pill">🏨 Hotels & Resorts</div>
+    <div class="office-pill">🏫 Schools & Colleges</div>
+    <div class="office-pill">🏥 Hospitals & Clinics</div>
+    <div class="office-pill">🛍️ Retail Spaces</div>
+  </div>
+</section>
+
+<!-- WHATSAPP ORDER SECTION -->
+<section class="wa-section">
+  <div class="wa-section-content container">
+    <div class="wa-icon-big"><i class="fab fa-whatsapp"></i></div>
+    <h2>Order Instantly on <em>WhatsApp</em></h2>
+    <p>No app downloads, no complex checkout — just message us on WhatsApp and we'll take care of the rest. Fast, easy, and personal.</p>
+    <div class="wa-steps">
+      <div class="wa-step">
+        <div class="wa-step-num">1</div>
+        <h4>Browse & Choose</h4>
+        <p>Pick your plants from our website</p>
+      </div>
+      <div class="wa-step">
+        <div class="wa-step-num">2</div>
+        <h4>Message Us</h4>
+        <p>Send plant names & quantity on WhatsApp</p>
+      </div>
+      <div class="wa-step">
+        <div class="wa-step-num">3</div>
+        <h4>Confirm Order</h4>
+        <p>Share your delivery address</p>
+      </div>
+      <div class="wa-step">
+        <div class="wa-step-num">4</div>
+        <h4>Get Delivered</h4>
+        <p>Fresh plants at your doorstep</p>
+      </div>
+    </div>
+    <button class="btn-whatsapp" style="font-size:16px;padding:16px 40px;" onclick="openWhatsApp('Hello! I would like to place a plant order. Please guide me.')">
+      <i class="fab fa-whatsapp"></i> Start WhatsApp Order
+    </button>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section-sm" style="background:var(--green-deep);text-align:center">
+  <div class="container">
+    <h2 style="color:white;font-size:36px;font-weight:300;margin-bottom:10px">Stay <em style="color:var(--green-pale)">Green</em></h2>
+    <p style="color:rgba(255,255,255,0.6);margin-bottom:28px;font-size:15px">Get plant care tips, new arrivals & exclusive offers in your inbox</p>
+    <div style="display:flex;max-width:480px;margin:0 auto;gap:10px">
+      <input type="email" placeholder="Your email address" style="flex:1;padding:14px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;outline:none">
+      <button class="btn-white" onclick="showToast('🌿 Welcome to the Verdantix family!')">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page-home -->
+
+<!-- ══════════════ SHOP ══════════════ -->
+<div class="page" id="page-shop">
+  <div class="page-hero-mini">
+    <div class="breadcrumb-nav"><span onclick="goPage('home')">Home</span> › Shop</div>
+    <h1>Our <em style="color:var(--green-light);font-style:italic">Plant</em> Collection</h1>
+    <p>300+ varieties of handpicked, healthy plants — order instantly on WhatsApp</p>
+  </div>
+  <div class="shop-layout">
+    <aside class="filter-sidebar">
+      <div class="filter-title">
+        Filters
+        <button style="font-size:12px;color:var(--green-light);font-weight:600;cursor:pointer" onclick="clearFilters()">Clear All</button>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Category</div>
+        <label class="filter-option"><input type="checkbox" value="indoor" onchange="applyFilters()"> Indoor Plants</label>
+        <label class="filter-option"><input type="checkbox" value="outdoor" onchange="applyFilters()"> Outdoor Plants</label>
+        <label class="filter-option"><input type="checkbox" value="succulents" onchange="applyFilters()"> Succulents & Cacti</label>
+        <label class="filter-option"><input type="checkbox" value="hanging" onchange="applyFilters()"> Hanging Plants</label>
+        <label class="filter-option"><input type="checkbox" value="flowering" onchange="applyFilters()"> Flowering Plants</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Price Range</div>
+        <input type="range" min="0" max="2000" value="2000" id="priceRange" oninput="updatePrice(this.value)">
+        <div class="price-range-display"><span>₹0</span><span id="maxPrice">₹2000</span></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Light Requirement</div>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Full Sun</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Partial Shade</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Low Light</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Indirect Light</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Size</div>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Small (< 30cm)</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Medium (30–60cm)</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()"> Large (> 60cm)</label>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;margin-top:8px" onclick="applyFilters()">Apply Filters</button>
+    </aside>
+    <div class="shop-main">
+      <div class="shop-header">
+        <div><h2>All Plants</h2><p id="shopCount">Showing all 20 plants</p></div>
+        <div class="shop-sort">
+          <select class="sort-select" onchange="sortProducts(this.value)">
+            <option value="default">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="new">Newest First</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')"><i class="fas fa-th"></i></button>
+            <button class="view-btn" id="listViewBtn" onclick="setView('list')"><i class="fas fa-list"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PRODUCT DETAIL ══════════════ -->
+<div class="page" id="page-product">
+  <div class="product-detail-layout">
+    <div class="product-gallery">
+      <div class="product-main-img" id="pdMainImg">
+        <img id="pdMainImgEl" src="" alt="Plant" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">
+      </div>
+      <div class="product-thumbs" id="pdThumbs"></div>
+    </div>
+    <div class="product-info">
+      <div class="breadcrumb"><span onclick="goPage('home')">Home</span> › <span onclick="goPage('shop')">Shop</span> › <span id="pdCategory">Plants</span></div>
+      <h1 id="pdName">Plant Name</h1>
+      <div class="rating-row">
+        <div class="stars">★★★★★</div>
+        <span class="review-count" id="pdReviews">(128 verified buyers)</span>
+      </div>
+      <div class="price-big"><span id="pdPrice">₹699</span><span class="old" id="pdOldPrice">₹999</span></div>
+      <p class="desc" id="pdDesc">Plant description here.</p>
+      <div class="product-options">
+        <div class="options-label">Size</div>
+        <div class="size-options">
+          <button class="size-btn active" onclick="selectSize(this)">Small</button>
+          <button class="size-btn" onclick="selectSize(this)">Medium</button>
+          <button class="size-btn" onclick="selectSize(this)">Large</button>
+        </div>
+      </div>
+      <div class="qty-row">
+        <div class="options-label" style="margin-bottom:0">Quantity</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input type="number" class="qty-num" id="pdQty" value="1" min="1" max="20" readonly>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+      <div class="product-cta-row">
+        <button class="wa-order-big" onclick="orderProductOnWA()" id="waOrderBtn">
+          <i class="fab fa-whatsapp"></i> Order on WhatsApp
+        </button>
+        <button class="wishlist-big" onclick="toggleWishlistCurrent(this)" title="Wishlist">
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
+      <div class="product-features">
+        <div class="feat-item"><i class="fas fa-check-circle"></i> Includes care guide</div>
+        <div class="feat-item"><i class="fas fa-truck"></i> Free delivery ₹699+</div>
+        <div class="feat-item"><i class="fas fa-shield-alt"></i> 7-day health guarantee</div>
+        <div class="feat-item"><i class="fas fa-leaf"></i> Eco-friendly packaging</div>
+        <div class="feat-item"><i class="fas fa-seedling"></i> Nursery-direct quality</div>
+        <div class="feat-item"><i class="fas fa-bolt"></i> Fast dispatch, 2–4 days</div>
+      </div>
+      <div class="whatsapp-box" onclick="orderProductOnWA()">
+        <i class="fab fa-whatsapp"></i>
+        <div>
+          <strong>Order Instantly on WhatsApp</strong>
+          <p>Chat with our plant expert · Get same-day confirmation</p>
+        </div>
+        <i class="fas fa-arrow-right" style="margin-left:auto;font-size:13px;color:var(--green-light)"></i>
+      </div>
+    </div>
+  </div>
+  <section class="section" style="background:var(--green-foam)">
+    <div class="container">
+      <div class="section-header"><span class="eyebrow">You May Also Like</span><h2>Related <em>Plants</em></h2></div>
+      <div class="products-grid" id="relatedProducts"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ CART ══════════════ -->
+<div class="page" id="page-cart">
+  <div class="cart-layout">
+    <div class="cart-items">
+      <div class="cart-header"><h2>Your Cart</h2><span id="cartItemCount">0 items</span></div>
+      <div id="cartItemsList"></div>
+      <div id="emptyCartMsg">
+        <div style="text-align:center;padding:60px 20px;background:white;border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:80px;margin-bottom:16px">🛒</div>
+          <h3 style="font-size:24px;color:var(--green-deep);margin-bottom:10px">Your cart is empty</h3>
+          <p style="color:var(--text-mid);margin-bottom:24px">Add some plants to get started!</p>
+          <button class="btn-primary" onclick="goPage('shop')">Browse Plants</button>
+        </div>
+      </div>
+    </div>
+    <div class="order-summary">
+      <div class="summary-title">Order Summary</div>
+      <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+      <div class="summary-row"><span>Delivery</span><span id="delivery">₹79</span></div>
+      <div class="summary-row total"><span>Total</span><span id="totalAmt">₹79</span></div>
+      <div style="margin-top:24px">
+        <div class="options-label" style="margin-bottom:14px">Delivery Details</div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="checkoutName" placeholder="Your Name"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone</label><input type="tel" id="checkoutPhone" placeholder="+91 98765 43210"></div>
+          <div class="form-group"><label>City</label><input type="text" id="checkoutCity" placeholder="City"></div>
+        </div>
+        <div class="form-group"><label>Address</label><textarea id="checkoutAddress" placeholder="Full delivery address" rows="2" style="resize:none"></textarea></div>
+      </div>
+      <button class="wa-checkout-btn" onclick="checkoutOnWhatsApp()">
+        <i class="fab fa-whatsapp"></i> Complete Order on WhatsApp
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--text-light);margin-top:12px">
+        <i class="fab fa-whatsapp" style="color:#25d366"></i> Our team will confirm your order instantly
+      </p>
+    </div>
+  </div>
+  <div class="section" style="background:var(--green-foam)">
+    <div class="container">
+      <div class="section-header"><span class="eyebrow">Order Status</span><h2>Track Your <em>Order</em></h2></div>
+      <div class="tracking-box">
+        <div style="display:flex;gap:12px;margin-bottom:24px">
+          <input type="text" id="trackInput" style="flex:1;border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none" placeholder="Enter Order ID (e.g. VRD-2024-1234)">
+          <button class="btn-primary" onclick="showToast('📦 Order VRD-2024-1234: Out for Delivery today!')">Track</button>
+        </div>
+        <div class="track-steps">
+          <div class="track-step done"><div class="track-icon"><i class="fas fa-check"></i></div><span>Order Placed</span></div>
+          <div class="track-step done"><div class="track-icon"><i class="fas fa-seedling"></i></div><span>Being Packed</span></div>
+          <div class="track-step active"><div class="track-icon"><i class="fas fa-truck"></i></div><span>Out for Delivery</span></div>
+          <div class="track-step"><div class="track-icon"><i class="fas fa-home"></i></div><span>Delivered</span></div>
+        </div>
+        <div style="background:var(--green-foam);border-radius:var(--radius-sm);padding:16px;text-align:center">
+          <p style="font-size:14px;color:var(--text-mid)">🚚 Your order is on its way! Expected delivery: <strong>Today, 4–6 PM</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="breadcrumb-nav"><span onclick="goPage('home')">Home</span> › About Us</div>
+    <h1>About <em style="color:var(--green-light);font-style:italic">B.L. Verdantix</em></h1>
+    <p>We believe every home deserves the quiet joy of a living plant — and we're on a mission to make it possible for everyone.</p>
+  </div>
+  <section class="section" style="background:white">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540575/B.L._Verdantix_Nursery_in_bloom_jv5ake.png" alt="B.L. Verdantix Nursery" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">
+        </div>
+        <div class="about-content">
+          <h2>Rooted in a <em>Passion</em> for Plants</h2>
+          <p>B.L. Verdantix was founded in 2026 with a small dream, but its roots go much deeper. This is not just a business, but a legacy — a dream of my grandfather, <em>Bhajan Lal</em>, which I, <em>Karan Chaudhary</em>, am proud to carry forward.</p>
+          <p>At just 17 years old, while pursuing my B.Tech in Agriculture, I took the first step toward building this vision. Starting a business at such a young age is not easy, but a strong purpose and determination have always driven me forward.</p>
+          <p>B.L. Verdantix is not just about selling plants; it's about connecting people with nature. We aim to bring greenery into homes, offices, schools, hospitals, and large institutions, creating healthier and cleaner environments everywhere.</p>
+          <p>Our vision is to become <strong>India's largest plant service company</strong> and to build a future where every city, every street, and every home becomes a part of a "Green India."</p>
+          <p><strong>B.L. Verdantix — Growing Dreams, Greening India 🌱</strong></p>
+          <div class="about-values">
+            <div class="value-item">
+              <div class="value-icon">🌱</div>
+              <div class="value-text">
+                <h4>Sustainably Sourced</h4>
+                <p>All plants are ethically grown with eco-friendly practices and biodegradable packaging.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">❤️</div>
+              <div class="value-text">
+                <h4>Grown with Love</h4>
+                <p>Every plant is cared for by our expert team before reaching your home.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">📚</div>
+              <div class="value-text">
+                <h4>Expert Knowledge</h4>
+                <p>Certified horticulturists back every purchase with professional care guidance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background:var(--green-foam)">
+    <div class="container">
+      <div class="section-header"><span class="eyebrow">Our People</span><h2>Meet the <em>Green Team</em></h2></div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540528/WhatsApp_Image_2026-03-26_at_9.25.32_AM_yf3ipg.jpg" alt="Karan Chaudhary" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="team-body"><h4>Karan Chaudhary</h4><span>Founder</span><p>17-year-old entrepreneur with a passion for sustainable agriculture.</p></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540288/WhatsApp_Image_2025-12-31_at_1.21.58_PM_yx9fnc.jpg" alt="Prashant Kumar" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="team-body"><h4>Prashant Kumar</h4><span>Head of Customer Experience</span><p>Ensures every plant parent feels supported — from selection to the first bloom.</p></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540281/aman_gupt_zgag85.jpg" alt="Aman Gupt" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="team-body"><h4>Aman Gupt</h4><span>Lead Plant Team</span><p>Passionate about creating the best plant care experiences for our customers.</p></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540276/nishant_a6y4ez.jpg" alt="Nishant Chauhan" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="team-body"><h4>Nishant Chauhan</h4><span>Operations Manager</span><p>Ensures every plant is perfectly packed and delivered on time.</p></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540257/WhatsApp_Image_2026-03-26_at_12.07.05_PM_yozjvt.jpg" alt="Rohit Kumar" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="team-body"><h4>Tanvi Kumari</h4><span>Finance and Marketing Expert</span><p>Drives our financial strategy and marketing initiatives to fuel growth.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background:var(--green-deep)">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center">
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:white">1K+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px">Happy Customers</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:white">30+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px">Plant Varieties</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:white">50+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px">Cities Delivered</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:white">4.8★</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px">Average Rating</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<div class="page" id="page-contact">
+  <div class="page-hero-mini">
+    <div class="breadcrumb-nav"><span onclick="goPage('home')">Home</span> › Contact</div>
+    <h1>Get in <em style="color:var(--green-light);font-style:italic">Touch</em></h1>
+    <p>Questions, bulk orders, or just plant chat — we're here!</p>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h2>Let's Talk Plants</h2>
+      <p>Whether you need help choosing the right plant, want to place a bulk order for your office, or just need some care advice — we're here for you.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h4>Visit Our Nursery</h4>
+            <p>Tejgarhi, Meerut, Uttar Pradesh – 250001</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <h4>Call Us</h4>
+            <p>+91 90585 45076 · Mon–Sat, 9AM–7PM</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Email Us</h4>
+            <p>blverdantix2026@gmail.com · Reply within 24 hrs</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+          <div>
+            <h4>WhatsApp Orders</h4>
+            <p>+91 90585 45076 · Instant reply guaranteed</p>
+          </div>
+        </div>
+      </div>
+      <button class="btn-whatsapp" style="margin-top:28px;width:100%;justify-content:center;font-size:15px;padding:16px 24px" onclick="openWhatsApp('Hello! I have an enquiry.')">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp Now
+      </button>
+    </div>
+    <div class="contact-form-card">
+      <h3>Send a Message</h3>
+      <div class="form-group"><label>Your Name</label><input type="text" placeholder="Ravi Kumar"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 98765 43210"></div>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option>General Enquiry</option>
+          <option>Bulk / Corporate Order</option>
+          <option>Plant Care Help</option>
+          <option>Order / Delivery Issue</option>
+          <option>Partnership</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Tell us how we can help…" style="resize:none"></textarea></div>
+      <button class="btn-primary" style="width:100%;justify-content:center" onclick="showToast('✅ Message sent! We\'ll reply within 24 hours.')">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ BLOG (PLANT CARE) ══════════════ -->
+<div class="page" id="page-blog">
+  <div class="page-hero-mini">
+    <div class="breadcrumb-nav"><span onclick="goPage('home')">Home</span> › Plant Care</div>
+    <h1>Plant Care & <em style="color:var(--green-light);font-style:italic">Guides</em></h1>
+    <p>Expert tips, seasonal guides, and stories to help your plants thrive</p>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        <div class="blog-card" onclick="openBlogPost(0)">
+          <div class="blog-img" style="background:none;overflow:hidden;padding:0">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539801/vertical-green-wall-maintenance-1067x800_qpwhqe.jpg" alt="Succulent Care" style="width:100%;height:100%;object-fit:cover">
+            <span class="tag">Care Guide</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">March 12, 2026 · 5 min read</div>
+            <h3>The Beginner's Guide to Succulent Care</h3>
+            <p>Everything about watering, sunlight, and soil for your succulents to thrive all year round.</p>
+            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="openBlogPost(1)">
+          <div class="blog-img" style="background:none;overflow:hidden;padding:0">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539814/bird_of_paradise_suquy1.jpg" alt="Air Purifying Plants" style="width:100%;height:100%;object-fit:cover">
+            <span class="tag">Indoor Plants</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">March 21, 2026 · 7 min read</div>
+            <h3>Top 10 Air-Purifying Plants for Your Home</h3>
+            <p>Science-backed plants that remove toxins and improve indoor air quality.</p>
+            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="openBlogPost(2)">
+          <div class="blog-img" style="background:none;overflow:hidden;padding:0">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539884/plant_care_service_480x480_cbzvml.webp" alt="Watering Plants" style="width:100%;height:100%;object-fit:cover">
+            <span class="tag">Watering Tips</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">March 15, 2026 · 4 min read</div>
+            <h3>How to Water Your Plants Perfectly</h3>
+            <p>Overwatering kills more plants than underwatering. Here's a simple guide.</p>
+            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="openBlogPost(3)">
+          <div class="blog-img" style="background:none;overflow:hidden;padding:0">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539828/kWFy8U2P2Kc8gPrdxfYt2T_xrwg7s.jpg" alt="Spring Repotting" style="width:100%;height:100%;object-fit:cover">
+            <span class="tag">Seasonal</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">March 5, 2026 · 6 min read</div>
+            <h3>Spring Repotting: When and How</h3>
+            <p>Spring is the best time to repot. A step-by-step guide to stress-free repotting.</p>
+            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="openBlogPost(4)">
+          <div class="blog-img" style="background:none;overflow:hidden;padding:0">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539834/15310bcc75453575afe0a77332dcfda2_hgfaub.jpg" alt="Gift Plants" style="width:100%;height:100%;object-fit:cover">
+            <span class="tag">Gifting</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">Feb 22, 2026 · 5 min read</div>
+            <h3>Best Plants to Gift This Season</h3>
+            <p>Plants make the most thoughtful gifts. Our top picks for every personality.</p>
+            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="openBlogPost(5)">
+          <div class="blog-img" style="background:none;overflow:hidden;padding:0">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539843/poinsettia_pink_xt4x5f.jpg" alt="Balcony Garden" style="width:100%;height:100%;object-fit:cover">
+            <span class="tag">Balcony Garden</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">Feb 10, 2026 · 8 min read</div>
+            <h3>Creating a Thriving Balcony Garden</h3>
+            <p>Turn even the smallest balcony into a green paradise with container gardening.</p>
+            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ BLOG POST ══════════════ -->
+<div class="page" id="page-blogpost">
+  <div class="blog-post-layout">
+    <div class="container" style="max-width:800px">
+      <div class="breadcrumb-nav" style="justify-content:flex-start;margin-bottom:24px">
+        <span onclick="goPage('home')">Home</span> ›
+        <span onclick="goPage('blog')">Plant Care</span> ›
+        <span id="bpCategory">Article</span>
+      </div>
+      <div class="blog-post-hero-img">
+        <img id="bpHeroImg" src="" alt="Blog Post" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">
+      </div>
+      <div class="blog-post-meta">
+        <span id="bpDate">April 12, 2024</span>
+        <span>·</span>
+        <span id="bpReadTime">5 min read</span>
+        <span class="blog-post-tag" id="bpTag">Care Guide</span>
+      </div>
+      <h1 id="bpTitle" class="blog-post-title">Blog Post Title</h1>
+      <div id="bpContent" class="blog-post-content"></div>
+      <div class="blog-post-footer">
+        <button class="btn-outline" onclick="goPage('blog')"><i class="fas fa-arrow-left"></i> Back to All Articles</button>
+        <button class="btn-whatsapp" onclick="openWhatsApp('Hello! I read your plant care article and need help.')"><i class="fab fa-whatsapp"></i> Ask Our Expert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ WISHLIST ══════════════ -->
+<div class="page" id="page-wishlist">
+  <div class="page-hero-mini">
+    <div class="breadcrumb-nav"><span onclick="goPage('home')">Home</span> › Wishlist</div>
+    <h1>My <em style="color:var(--green-light);font-style:italic">Wishlist</em></h1>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="products-grid" id="wishlistGrid"></div>
+      <div id="emptyWishlist" style="display:none;text-align:center;padding:60px 20px">
+        <div style="font-size:80px;margin-bottom:16px">💚</div>
+        <h3 style="font-size:28px;color:var(--green-deep);margin-bottom:10px">Your wishlist is empty</h3>
+        <p style="color:var(--text-mid);margin-bottom:24px">Save plants you love for later!</p>
+        <button class="btn-primary" onclick="goPage('shop')">Browse Plants</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>🌿 B.L. Verdantix</h3>
+      <p>Bringing the calm and beauty of nature into every home. Premium plants, expert care, delivered with love.</p>
+      <div class="social-links">
+        <a class="social-link" href="https://www.instagram.com/b.l.verdantixagri2026?igsh=MWFmM3E4NGRwdmZl" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a class="social-link" href="https://www.facebook.com/share/1KC5CAfjHD/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a class="social-link" href="https://x.com/verdantixa97632" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a class="social-link" href="https://www.linkedin.com/in/b-l-verdantix-ba21343a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a class="social-link wa" href="9058545076" onclick="openWhatsApp('Hello!')" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul>
+      <li><a href="#" onclick="filterCategory('indoor')">Indoor Plants</a></li>
+      <li><a href="#" onclick="filterCategory('outdoor')">Outdoor Plants</a></li>
+      <li><a href="#" onclick="filterCategory('succulents')">Succulents</a></li>
+      <li><a href="#" onclick="filterCategory('hanging')">Hanging Plants</a></li>
+      <li><a href="#" onclick="filterCategory('flowering')">Flowering Plants</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Help</h4><ul>
+      <li><a href="#" onclick="openWhatsApp('Hello! I need help.')">WhatsApp Us</a></li>
+      <li><a href="#" onclick="goPage('contact')">Contact Us</a></li>
+      <li><a href="#" onclick="goPage('cart')">Track Order</a></li>
+      <li><a href="#">Shipping Policy</a></li>
+      <li><a href="#">FAQs</a></li>
+      <li><a href="#" onclick="goPage('blog')">Plant Care</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Company</h4><ul>
+      <li><a href="#" onclick="goPage('about')">About Us</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#" onclick="goPage('blog')">Blog</a></li>
+      <li><a href="#">Bulk Orders</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 B.L. Verdantix. All rights reserved. Made with 💚 in Meerut, India.</p>
+    <div class="payment-icons">
+      <div class="payment-icon">Visa</div>
+      <div class="payment-icon">Mastercard</div>
+      <div class="payment-icon">UPI</div>
+      <div class="payment-icon">COD</div>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <span id="toastMsg">Done!</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
