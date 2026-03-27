@@ -30,6 +30,7 @@
     <li><a href="#" onclick="goPage('shop')" id="nav-shop">Shop</a></li>
     <li><a href="#" onclick="goPage('about')" id="nav-about">About</a></li>
     <li><a href="#" onclick="goPage('blog')" id="nav-blog">Plant Care</a></li>
+    <li><a href="#" onclick="goPage('news')" id="nav-news">Blog & News</a></li>
     <li><a href="#" onclick="goPage('contact')" id="nav-contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
@@ -58,6 +59,7 @@
   <a href="#" onclick="goPage('shop');toggleMobileMenu()">Shop</a>
   <a href="#" onclick="goPage('about');toggleMobileMenu()">About Us</a>
   <a href="#" onclick="goPage('blog');toggleMobileMenu()">Plant Care</a>
+  <a href="#" onclick="goPage('news');toggleMobileMenu()">Blog & News</a>
   <a href="#" onclick="goPage('contact');toggleMobileMenu()">Contact</a>
 </div>
 
@@ -588,7 +590,7 @@
         </div>
         <div class="team-card">
           <div class="team-avatar">
-            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540257/WhatsApp_Image_2026-03-26_at_12.07.05_PM_yozjvt.jpg" alt="Rohit Kumar" style="width:100%;height:100%;object-fit:cover">
+            <img src="https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540257/WhatsApp_Image_2026-03-26_at_12.07.05_PM_yozjvt.jpg" alt="Tanvi Kumari" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="team-body"><h4>Tanvi Kumari</h4><span>Finance and Marketing Expert</span><p>Drives our financial strategy and marketing initiatives to fuel growth.</p></div>
         </div>
@@ -654,14 +656,15 @@
     </div>
     <div class="contact-form-card">
       <h3>Send a Message</h3>
-      <div class="form-group"><label>Your Name</label><input type="text" placeholder="Ravi Kumar"></div>
+      <!-- Contact form — on submit sends via WhatsApp to +91 90585 45076 -->
+      <div class="form-group"><label>Your Name</label><input type="text" id="contactName" placeholder="Ravi Kumar"></div>
       <div class="form-row">
-        <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-        <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 98765 43210"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="contactEmail" placeholder="you@email.com"></div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="contactPhone" placeholder="+91 98765 43210"></div>
       </div>
       <div class="form-group">
         <label>Subject</label>
-        <select>
+        <select id="contactSubject">
           <option>General Enquiry</option>
           <option>Bulk / Corporate Order</option>
           <option>Plant Care Help</option>
@@ -669,10 +672,18 @@
           <option>Partnership</option>
         </select>
       </div>
-      <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Tell us how we can help…" style="resize:none"></textarea></div>
-      <button class="btn-primary" style="width:100%;justify-content:center" onclick="showToast('✅ Message sent! We\'ll reply within 24 hours.')">
-        <i class="fas fa-paper-plane"></i> Send Message
-      </button>
+      <div class="form-group"><label>Message</label><textarea id="contactMessage" rows="4" placeholder="Tell us how we can help…" style="resize:none"></textarea></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-primary" style="flex:1;justify-content:center" onclick="sendContactForm()">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        <button class="btn-whatsapp" style="flex:1;justify-content:center" onclick="sendContactViaWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Send on WhatsApp
+        </button>
+      </div>
+      <p style="font-size:12px;color:var(--text-light);margin-top:12px;text-align:center">
+        📩 Message will be sent directly to our WhatsApp number for fastest response
+      </p>
     </div>
   </div>
 </div>
@@ -792,6 +803,34 @@
   </div>
 </div>
 
+<!-- ══════════════ NEWS POST DETAIL ══════════════ -->
+<div class="page" id="page-newspost">
+  <div class="blog-post-layout">
+    <div class="container" style="max-width:800px">
+      <div class="breadcrumb-nav" style="justify-content:flex-start;margin-bottom:24px">
+        <span onclick="goPage('home')">Home</span> ›
+        <span onclick="goPage('news')">Blog & News</span> ›
+        <span id="npCategory">Article</span>
+      </div>
+      <div class="blog-post-hero-img">
+        <img id="npHeroImg" src="" alt="News Post" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">
+      </div>
+      <div class="blog-post-meta">
+        <span id="npDate"></span>
+        <span>·</span>
+        <span id="npReadTime"></span>
+        <span class="blog-post-tag" id="npTag"></span>
+      </div>
+      <h1 id="npTitle" class="blog-post-title"></h1>
+      <div id="npContent" class="blog-post-content"></div>
+      <div class="blog-post-footer">
+        <button class="btn-outline" onclick="goPage('news')"><i class="fas fa-arrow-left"></i> Back to Blog & News</button>
+        <button class="btn-whatsapp" onclick="openWhatsApp('Hello! I read your article and have a question.')"><i class="fab fa-whatsapp"></i> Ask Our Expert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════ WISHLIST ══════════════ -->
 <div class="page" id="page-wishlist">
   <div class="page-hero-mini">
@@ -811,6 +850,90 @@
   </section>
 </div>
 
+<!-- ══════════════ BLOG & NEWS PAGE ══════════════ -->
+<div class="page" id="page-news">
+
+  <!-- NEWS HERO SLIDER -->
+  <section class="news-hero-slider">
+    <div class="news-slider-wrapper" id="newsSliderWrapper">
+      <div class="news-slide">
+        <div class="news-slide-overlay"></div>
+        <div class="news-slide-bg" style="background-image:url('https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540575/B.L._Verdantix_Nursery_in_bloom_jv5ake.png')"></div>
+        <div class="news-slide-content">
+          <span class="news-slide-tag">🌿 Latest News</span>
+          <h2>B.L. Verdantix Expands to 8+ Cities Across Uttar Pradesh</h2>
+          <p>We are thrilled to announce our delivery network now covers over 50 cities, bringing fresh plants to more homes than ever before.</p>
+          <button class="btn-white" onclick="openNewsPost(0)">Read Full Story <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="news-slide">
+        <div class="news-slide-overlay"></div>
+        <div class="news-slide-bg" style="background-image:url('https://res.cloudinary.com/dpnplxgjo/image/upload/v1774587576/download_22_jmomr4.jpg')"></div>
+        <div class="news-slide-content">
+          <span class="news-slide-tag">🌱 Growing Tips</span>
+          <h2>Summer Plant Care: Keep Your Plants Cool & Thriving</h2>
+          <p>As temperatures rise across India, here's your complete guide to protecting your plants from the summer heat.</p>
+          <button class="btn-white" onclick="openNewsPost(1)">Read Full Story <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="news-slide">
+        <div class="news-slide-overlay"></div>
+        <div class="news-slide-bg" style="background-image:url('https://res.cloudinary.com/dpnplxgjo/image/upload/v1774588123/WhatsApp_Image_2026-03-27_at_10.08.06_AM_xx2wmj.jpg')"></div>
+        <div class="news-slide-content">
+          <span class="news-slide-tag">🏆 Achievement</span>
+          <h2>Our Founder Karan Chaudhary Wins National University Of Uzbekistan Award 2026</h2>
+          <p>At just 17 years old, Karan has been recognised as one of India's most promising young agri-entrepreneurs.</p>
+          <button class="btn-white" onclick="openNewsPost(2)">Read Full Story <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <button class="news-arrow news-prev" onclick="newsSlidePrev()"><i class="fas fa-chevron-left"></i></button>
+    <button class="news-arrow news-next" onclick="newsSlideNext()"><i class="fas fa-chevron-right"></i></button>
+    <div class="news-dots" id="newsDots">
+      <span class="news-dot active" onclick="goNewsSlide(0)"></span>
+      <span class="news-dot" onclick="goNewsSlide(1)"></span>
+      <span class="news-dot" onclick="goNewsSlide(2)"></span>
+    </div>
+  </section>
+
+  <!-- NEWS FILTER TABS -->
+  <section class="section" style="padding-bottom:0">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Stay Informed</span>
+        <h2>Latest <em>Blog & News</em></h2>
+        <p>Updates, stories, tips, and insights from the B.L. Verdantix world</p>
+      </div>
+      <div class="news-tabs">
+        <button class="news-tab active" onclick="filterNews('all',this)">All Posts</button>
+        <button class="news-tab" onclick="filterNews('news',this)">Company News</button>
+        <button class="news-tab" onclick="filterNews('tips',this)">Growing Tips</button>
+        <button class="news-tab" onclick="filterNews('story',this)">Stories</button>
+        <button class="news-tab" onclick="filterNews('launch',this)">New Launches</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS GRID -->
+  <section class="section" style="padding-top:32px">
+    <div class="container">
+      <div class="news-grid" id="newsGrid"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER CTA -->
+  <section class="section-sm" style="background:var(--green-deep);text-align:center">
+    <div class="container">
+      <h2 style="color:white;font-size:36px;font-weight:300;margin-bottom:10px">Never Miss an <em style="color:var(--green-pale)">Update</em></h2>
+      <p style="color:rgba(255,255,255,0.6);margin-bottom:28px;font-size:15px">Subscribe to get latest blog posts, plant tips, and exclusive offers</p>
+      <div style="display:flex;max-width:480px;margin:0 auto;gap:10px">
+        <input type="email" id="newsEmail" placeholder="Your email address" style="flex:1;padding:14px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;outline:none">
+        <button class="btn-white" onclick="subscribeNews()">Subscribe</button>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <div class="footer-grid">
@@ -822,7 +945,7 @@
         <a class="social-link" href="https://www.facebook.com/share/1KC5CAfjHD/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
         <a class="social-link" href="https://x.com/verdantixa97632" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
         <a class="social-link" href="https://www.linkedin.com/in/b-l-verdantix-ba21343a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a class="social-link wa" href="9058545076" onclick="openWhatsApp('Hello!')" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a class="social-link wa" href="#" onclick="openWhatsApp('Hello!')" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
     <div class="footer-col"><h4>Shop</h4><ul>
@@ -842,14 +965,14 @@
     </ul></div>
     <div class="footer-col"><h4>Company</h4><ul>
       <li><a href="#" onclick="goPage('about')">About Us</a></li>
+      <li><a href="#" onclick="goPage('news')">Blog & News</a></li>
       <li><a href="#">Careers</a></li>
-      <li><a href="#" onclick="goPage('blog')">Blog</a></li>
       <li><a href="#">Bulk Orders</a></li>
       <li><a href="#">Privacy Policy</a></li>
     </ul></div>
   </div>
   <div class="footer-bottom">
-    <p>© 2024 B.L. Verdantix. All rights reserved. Made with 💚 in Meerut, India.</p>
+    <p>© 2026 B.L. Verdantix. All rights reserved. Made with 💚 in Meerut, India.</p>
     <div class="payment-icons">
       <div class="payment-icon">Visa</div>
       <div class="payment-icon">Mastercard</div>
