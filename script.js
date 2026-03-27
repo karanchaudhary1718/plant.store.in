@@ -48,6 +48,46 @@ if (sliderEl) {
   }, { passive: true });
 }
 
+// ─── NEWS SLIDER LOGIC ───
+let currentNewsSlide = 0;
+const totalNewsSlides = 3;
+let newsSliderInterval;
+
+function goNewsSlide(index) {
+  currentNewsSlide = index;
+  const wrapper = document.getElementById('newsSliderWrapper');
+  if (wrapper) {
+    wrapper.style.transform = `translateX(-${currentNewsSlide * 33.333}%)`;
+  }
+  document.querySelectorAll('.news-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentNewsSlide);
+  });
+}
+
+function newsSlideNext() {
+  currentNewsSlide = (currentNewsSlide + 1) % totalNewsSlides;
+  goNewsSlide(currentNewsSlide);
+  resetNewsSliderTimer();
+}
+
+function newsSlidePrev() {
+  currentNewsSlide = (currentNewsSlide - 1 + totalNewsSlides) % totalNewsSlides;
+  goNewsSlide(currentNewsSlide);
+  resetNewsSliderTimer();
+}
+
+function startNewsSlider() {
+  newsSliderInterval = setInterval(() => {
+    currentNewsSlide = (currentNewsSlide + 1) % totalNewsSlides;
+    goNewsSlide(currentNewsSlide);
+  }, 5000);
+}
+
+function resetNewsSliderTimer() {
+  clearInterval(newsSliderInterval);
+  startNewsSlider();
+}
+
 // ─── PRODUCT DATA ───
 const products = [
   {
@@ -265,7 +305,7 @@ const blogPosts = [
     id: 0,
     title: "The Beginner's Guide to Succulent Care",
     category: "Care Guide",
-    date: "April 12, 2024",
+    date: "March 12, 2026",
     readTime: "5 min read",
     img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539801/vertical-green-wall-maintenance-1067x800_qpwhqe.jpg",
     content: `
@@ -291,7 +331,7 @@ const blogPosts = [
     id: 1,
     title: "Top 10 Air-Purifying Plants for Your Home",
     category: "Indoor Plants",
-    date: "March 28, 2024",
+    date: "March 25, 2026",
     readTime: "7 min read",
     img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539814/bird_of_paradise_suquy1.jpg",
     content: `
@@ -310,7 +350,7 @@ const blogPosts = [
     id: 2,
     title: "How to Water Your Plants Perfectly",
     category: "Watering Tips",
-    date: "March 15, 2024",
+    date: "March 15, 2026",
     readTime: "4 min read",
     img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539884/plant_care_service_480x480_cbzvml.webp",
     content: `
@@ -338,7 +378,7 @@ const blogPosts = [
     id: 3,
     title: "Spring Repotting: When and How",
     category: "Seasonal",
-    date: "March 5, 2024",
+    date: "March 5, 2026",
     readTime: "6 min read",
     img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539828/kWFy8U2P2Kc8gPrdxfYt2T_xrwg7s.jpg",
     content: `
@@ -363,7 +403,7 @@ const blogPosts = [
     id: 4,
     title: "Best Plants to Gift This Season",
     category: "Gifting",
-    date: "February 22, 2024",
+    date: "February 22, 2026",
     readTime: "5 min read",
     img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539834/15310bcc75453575afe0a77332dcfda2_hgfaub.jpg",
     content: `
@@ -388,7 +428,7 @@ const blogPosts = [
     id: 5,
     title: "Creating a Thriving Balcony Garden",
     category: "Balcony Garden",
-    date: "February 10, 2024",
+    date: "February 10, 2026",
     readTime: "8 min read",
     img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774539843/poinsettia_pink_xt4x5f.jpg",
     content: `
@@ -411,10 +451,255 @@ const blogPosts = [
   }
 ];
 
-let cart     = JSON.parse(localStorage.getItem('blv_cart') || '[]');
-let wishlist = JSON.parse(localStorage.getItem('blv_wish') || '[]');
-let filteredProducts = [...products];
-let currentProduct = null;
+// ─── NEWS / BLOG DATA ───
+const newsArticles = [
+  {
+    id: 0,
+    title: "B.L. Verdantix Expands to 8+ Cities Across Uttar Pradesh",
+    category: "news",
+    tag: "Company News",
+    tagClass: "tag-news",
+    date: "March 26, 2026",
+    readTime: "3 min read",
+    author: "Karan Chaudhary",
+    authorImg: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540528/WhatsApp_Image_2026-03-26_at_9.25.32_AM_yf3ipg.jpg",
+    featured: true,
+    img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540575/B.L._Verdantix_Nursery_in_bloom_jv5ake.png",
+    excerpt: "We are thrilled to announce our delivery network now covers over 8 cities across Uttar Pradesh, bringing fresh, healthy plants closer to more homes and offices than ever before.",
+    content: `
+      <p>Since our founding in 2026, B.L. Verdantix has been on a mission to make premium plants accessible to every Indian home. Today, we are proud to announce that our delivery network now covers <strong>8+ cities</strong> across Uttar Pradesh — from Meerut to Agra, Delhi to Mathura.</p>
+      <h2>What This Means for You</h2>
+      <p>Whether you're in a metro city or a Tier-2 town, our carefully packed plants will now reach your doorstep within 2–4 working days. Each plant is inspected by our horticulture team, securely packaged in eco-friendly materials, and dispatched with a care guide.</p>
+      <h2>Our Commitment to Quality</h2>
+      <p>Expanding to new cities doesn't mean compromising on quality. Every nursery we partner with meets our strict health and sustainability standards. We check each plant before dispatch — no exceptions.</p>
+      <div class="tip-box"><strong>📦 New Cities Include:</strong> Mathura, Agra, Hathras, Aligarh, Dehradun, Noida, Gaziabadh, Meerut, Delhi, Bijnor, and many more!</div>
+      <p>This expansion is just the beginning. Our vision is to become India's largest plant delivery company — and with your support, we're getting closer every day. Thank you for being part of the B.L. Verdantix family! 🌱</p>
+    `
+  },
+  {
+    id: 1,
+    title: "Summer Plant Care: Keep Your Plants Cool & Thriving",
+    category: "tips",
+    tag: "Growing Tips",
+    tagClass: "tag-tips",
+    date: "March 22, 2026",
+    readTime: "6 min read",
+    author: "Tanvi Kumari",
+    authorImg: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540257/WhatsApp_Image_2026-03-26_at_12.07.05_PM_yozjvt.jpg",
+    featured: false,
+    img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774587576/download_22_jmomr4.jpg",
+    excerpt: "As temperatures across India climb above 40°C, your plants need extra care. Here's your complete summer survival guide.",
+    content: `
+      <p>Indian summers are brutal — and our plants feel it too. When temperatures soar above 40°C, even hardy houseplants can suffer heat stress, dry out rapidly, or get sunburned. Here's how to help your green friends survive and thrive this season.</p>
+      <h2>1. Watering in Summer</h2>
+      <p>Water more frequently, but always check the soil first. In peak summer, most plants may need watering every 2–3 days. Always water in the early morning or evening — never in the afternoon when the soil is hot, as this can scorch roots.</p>
+      <h2>2. Shade and Sun Management</h2>
+      <p>Move sun-sensitive plants like ferns, peace lilies, and calatheas away from west-facing windows. Outdoor plants should have afternoon shade cloth (50%) to protect from the harshest sun.</p>
+      <div class="tip-box"><strong>🌡️ Heat Stress Signs:</strong> Wilting despite watered soil, yellow or brown crispy leaf edges, and dry potting mix within 24 hours of watering are all signs your plant is too hot.</div>
+      <h2>3. Increase Humidity</h2>
+      <p>Air conditioning dries indoor air dramatically. Group your plants together, use a pebble tray with water, or mist leaves lightly in the morning to maintain humidity.</p>
+      <p>With a little extra attention during summer, your plants will reward you with lush, healthy growth all season. Stay cool! ☀️🌿</p>
+    `
+  },
+  {
+    id: 2,
+    title: "Our Founder Karan Chaudhary Wins National University Of Uzbekistan Award 2026",
+    category: "story",
+    tag: "Our Story",
+    tagClass: "tag-story",
+    date: "March 20, 2026",
+    readTime: "4 min read",
+    author: "Prashant Kumar",
+    authorImg: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540288/WhatsApp_Image_2025-12-31_at_1.21.58_PM_yx9fnc.jpg",
+    featured: false,
+    img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774587628/WhatsApp_Image_2026-03-27_at_9.56.09_AM_leiqql.jpg",
+    excerpt: "At just 17 years old, Karan Chaudhary has been recognised as one of Uttar Pradesh's most promising young agri-entrepreneurs for his work with B.L. Verdantix.",
+    content: `
+      <p>We are incredibly proud to share that our founder, <strong>Karan Chaudhary</strong>, has been honoured with the <em>Young Entrepreneur of the Year 2026</em> award by the National University of Uzbekistan.</p>
+      <h2>From a Dream to a Movement</h2>
+      <p>Karan started B.L. Verdantix at 17 years old with a clear purpose — to carry forward the legacy of his grandfather, Bhajan Lal, and to bring greenery into every Indian home. What started as a small nursery in Meerut has grown into a pan-India operation within months of launch.</p>
+      <p>Despite juggling his B.Tech in Agriculture with running a growing startup, Karan has shown remarkable dedication, vision, and business acumen far beyond his years.</p>
+      <div class="tip-box"><strong>🏆 Award Citation:</strong> "For outstanding contribution to sustainable agriculture and green entrepreneurship in Uttar Pradesh — demonstrating that age is no barrier to changing the world."</div>
+      <h2>What's Next?</h2>
+      <p>Karan's vision for B.L. Verdantix extends far beyond a plant store. He envisions large-scale urban greening projects, partnerships with schools and hospitals, and eventually, a fully sustainable plant production facility in Meerut. The best is yet to come! 🌱</p>
+    `
+  },
+  {
+    id: 3,
+    title: "🆕 New Launch: Rare Collector's Plant Collection Now Available",
+    category: "launch",
+    tag: "New Launch",
+    tagClass: "tag-launch",
+    date: "March 18, 2026",
+    readTime: "3 min read",
+    author: "Karan Chaudhary",
+    authorImg: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540528/WhatsApp_Image_2026-03-26_at_9.25.32_AM_yf3ipg.jpg",
+    featured: false,
+    img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540879/poinsettia_pink_a8mgu3.jpg",
+    excerpt: "We've sourced some of India's rarest and most sought-after houseplants. Limited stock — order on WhatsApp before they're gone!",
+    content: `
+      <p>Plant collectors, this one is for you! We have spent months sourcing some of the rarest and most beautiful plant varieties available in India — and they are finally ready to ship.</p>
+      <h2>What's in the Rare Collection?</h2>
+      <ul>
+        <li><strong>Monstera Thai Constellation</strong> — The holy grail of variegated plants. Creamy white splashes on deep green leaves.</li>
+        <li><strong>Philodendron Pink Princess</strong> — Stunning bubblegum pink variegation on heart-shaped leaves.</li>
+        <li><strong>Hoya Kerrii (Heart Hoya)</strong> — Perfect heart-shaped leaves. A romantic collector's favourite.</li>
+        <li><strong>Alocasia Black Velvet</strong> — Velvety dark leaves with silver veins. Truly stunning.</li>
+      </ul>
+      <div class="tip-box"><strong>⚠️ Limited Stock:</strong> These rare varieties are available in very limited quantities. Once they're gone, they may not be restocked for months. Order on WhatsApp to secure yours!</div>
+      <p>These plants are perfect for collectors, plant enthusiasts, or as a very special gift. Message us on WhatsApp now to check current availability and pricing! 🌿</p>
+    `
+  },
+  {
+    id: 4,
+    title: "How Plants Transformed Our Customer Ravi's Office",
+    category: "story",
+    tag: "Our Story",
+    tagClass: "tag-story",
+    date: "March 15, 2026",
+    readTime: "5 min read",
+    author: "Prashant Kumar",
+    authorImg: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540288/WhatsApp_Image_2025-12-31_at_1.21.58_PM_yx9fnc.jpg",
+    featured: false,
+    img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774589004/VG-Office-2-1-1024x771_yhgxos.jpg",
+    excerpt: "Ravi ordered 12 plants for his Gurgaon office. Three months later, he says productivity and team morale have never been higher.",
+    content: `
+      <p>When Ravi Kumar, founder of a Gurgaon-based tech startup, reached out to us in January, he had one simple request: make our office feel less like a corporate box. Three months later, we caught up with him — and the results are remarkable.</p>
+      <h2>The Brief</h2>
+      <p>Ravi wanted plants that were low-maintenance (no one had time to water plants daily), air-purifying, and visually impressive for client meetings. We recommended a mix of Snake Plants, ZZ Plants, Monstera Deliciosa, and a statement Fiddle Leaf Fig for the reception area.</p>
+      <h2>The Results</h2>
+      <p>"Within two weeks, people stopped calling our office 'the grey box,'" Ravi told us. "My team started taking breaks near the plants. There's something calming about having nature inside."</p>
+      <div class="tip-box"><strong>💬 Ravi's Words:</strong> "The best investment I made for my office. Plants changed the whole energy. B.L. Verdantix made it incredibly easy — they even advised me on placement for maximum impact."</div>
+      <p>Interested in greenifying your office? Contact us for a free consultation and bulk office plant package! 🌿</p>
+    `
+  },
+  {
+    id: 5,
+    title: "5 Reasons You Should Have Plants in Every Room",
+    category: "tips",
+    tag: "Growing Tips",
+    tagClass: "tag-tips",
+    date: "March 10, 2026",
+    readTime: "4 min read",
+    author: "Nishant Chauhan",
+    authorImg: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774540276/nishant_a6y4ez.jpg",
+    featured: false,
+    img: "https://res.cloudinary.com/dpnplxgjo/image/upload/v1774589152/WhatsApp_Image_2026-03-27_at_10.25.33_AM_prwc5p.jpg",
+    excerpt: "Science backs it up — plants in your home reduce stress, improve focus, boost creativity, and even help you sleep better.",
+    content: `
+      <p>You already know plants look beautiful. But did you know they're backed by science as one of the most effective ways to improve your home environment and your own wellbeing? Here are five reasons every room in your home deserves a plant.</p>
+      <h2>1. They Purify Your Air</h2>
+      <p>NASA research shows that common houseplants remove benzene, formaldehyde, xylene, and trichloroethylene from indoor air. One plant per 9 sq. metres makes a measurable difference.</p>
+      <h2>2. They Reduce Stress</h2>
+      <p>Multiple studies show that just <em>looking at plants</em> for a few minutes lowers cortisol levels. Having plants in your workspace reduces physiological stress by up to 37%.</p>
+      <h2>3. They Improve Sleep</h2>
+      <p>Plants like Snake Plants and Peace Lilies release oxygen at night and increase air humidity — both of which contribute to better quality sleep.</p>
+      <h2>4. They Boost Productivity</h2>
+      <p>Research from the University of Exeter found that workers in plant-enriched offices were 15% more productive than those in plant-free environments.</p>
+      <h2>5. They Make You Happier</h2>
+      <p>Caring for a living thing — watering it, watching it grow new leaves — activates the same brain pathways as caring for a pet or child. It's genuinely mood-lifting.</p>
+      <div class="tip-box"><strong>🌿 Start Simple:</strong> Begin with one plant per room. A Snake Plant in the bedroom, a Pothos in the kitchen, a Monstera in the living room. You'll notice the difference within a week.</div>
+    `
+  }
+];
+
+let currentNewsFilter = 'all';
+
+function renderNewsGrid(filter) {
+  const grid = document.getElementById('newsGrid');
+  if (!grid) return;
+  const filtered = filter === 'all' ? newsArticles : newsArticles.filter(a => a.category === filter);
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-light);padding:40px">No articles in this category yet. Check back soon!</p>';
+    return;
+  }
+  grid.innerHTML = filtered.map((article, index) => `
+    <div class="news-card ${article.featured && filter === 'all' && index === 0 ? 'featured' : ''}" onclick="openNewsPost(${article.id})">
+      <div class="news-card-img">
+        <img src="${article.img}" alt="${article.title}" loading="lazy">
+        <span class="news-card-tag ${article.tagClass}">${article.tag}</span>
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-meta">
+          <span>${article.date}</span>
+          <span class="dot"></span>
+          <span>${article.readTime}</span>
+        </div>
+        <h3>${article.title}</h3>
+        <p>${article.excerpt}</p>
+        <div class="news-card-footer">
+          <div class="news-author">
+            <div class="news-author-avatar"><img src="${article.authorImg}" alt="${article.author}"></div>
+            <span class="news-author-name">${article.author}</span>
+          </div>
+          <span class="news-read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterNews(category, btn) {
+  currentNewsFilter = category;
+  document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderNewsGrid(category);
+}
+
+function openNewsPost(id) {
+  const article = newsArticles.find(a => a.id === id);
+  if (!article) return;
+  document.getElementById('npTitle').textContent    = article.title;
+  document.getElementById('npDate').textContent     = article.date;
+  document.getElementById('npReadTime').textContent = article.readTime;
+  document.getElementById('npCategory').textContent = article.tag;
+  document.getElementById('npTag').textContent      = article.tag;
+  document.getElementById('npTag').className        = `blog-post-tag ${article.tagClass}`;
+  document.getElementById('npHeroImg').src          = article.img;
+  document.getElementById('npHeroImg').alt          = article.title;
+  document.getElementById('npContent').innerHTML    = article.content;
+  goPage('newspost');
+}
+
+function subscribeNews() {
+  const email = document.getElementById('newsEmail');
+  if (email && email.value.trim()) {
+    showToast('🌿 Subscribed! Welcome to the Verdantix family!');
+    email.value = '';
+  } else {
+    showToast('📧 Please enter your email first!');
+  }
+}
+
+// ─── WHATSAPP NUMBER ───
+const WA_NUMBER = '9058545076';
+
+// ─── CONTACT FORM ───
+function sendContactForm() {
+  const name    = document.getElementById('contactName')?.value?.trim();
+  const email   = document.getElementById('contactEmail')?.value?.trim();
+  const phone   = document.getElementById('contactPhone')?.value?.trim();
+  const subject = document.getElementById('contactSubject')?.value;
+  const message = document.getElementById('contactMessage')?.value?.trim();
+
+  if (!name || !message) {
+    showToast('⚠️ Please fill in your name and message!');
+    return;
+  }
+
+  // Send via WhatsApp to 9058545076
+  const waMsg = `📩 *New Contact Form Message — B.L. Verdantix Website*\n\n*Name:* ${name}\n*Email:* ${email || 'Not provided'}\n*Phone:* ${phone || 'Not provided'}\n*Subject:* ${subject}\n\n*Message:*\n${message}\n\n---\nSent from blverdantix.com contact form`;
+  openWhatsApp(waMsg);
+  showToast('✅ Opening WhatsApp to send your message!');
+}
+
+function sendContactViaWhatsApp() {
+  const name    = document.getElementById('contactName')?.value?.trim() || 'A visitor';
+  const subject = document.getElementById('contactSubject')?.value || 'General Enquiry';
+  const message = document.getElementById('contactMessage')?.value?.trim() || '';
+  const waMsg = `Hello! I'm ${name}. I have a *${subject}* enquiry.\n\n${message ? message : 'Please get in touch with me.'}`;
+  openWhatsApp(waMsg);
+}
 
 // ─── NAVIGATION ───
 function goPage(page) {
@@ -429,6 +714,10 @@ function goPage(page) {
   if (page === 'shop')     renderShop();
   if (page === 'cart')     renderCart();
   if (page === 'wishlist') renderWishlist();
+  if (page === 'news')     {
+    renderNewsGrid(currentNewsFilter);
+    startNewsSlider();
+  }
 }
 
 // ─── CARD BUILDER ───
@@ -476,12 +765,16 @@ function renderNewLaunches() {
   document.getElementById('newLaunchesGrid').innerHTML = newPlants.map(p => createProductCard(p, true)).join('');
 }
 
+let filteredProducts = [...products];
+
 function renderShop() {
   document.getElementById('shopGrid').innerHTML = filteredProducts.map(p => createProductCard(p, false)).join('');
   document.getElementById('shopCount').textContent = `Showing ${filteredProducts.length} plant${filteredProducts.length !== 1 ? 's' : ''}`;
 }
 
 // ─── PRODUCT DETAIL ───
+let currentProduct = null;
+
 function viewProduct(id) {
   const p = products.find(x => x.id === id);
   currentProduct = p;
@@ -534,8 +827,6 @@ function openBlogPost(index) {
 }
 
 // ─── WHATSAPP ───
-const WA_NUMBER = '9058545076';
-
 function openWhatsApp(msg) {
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
@@ -569,6 +860,9 @@ function checkoutOnWhatsApp() {
 }
 
 // ─── CART ───
+let cart = JSON.parse(localStorage.getItem('blv_cart') || '[]');
+let wishlist = JSON.parse(localStorage.getItem('blv_wish') || '[]');
+
 function addToCart(id) {
   const p = products.find(x => x.id === id);
   const ex = cart.find(i => i.id === id);
